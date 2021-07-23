@@ -108,13 +108,13 @@ public class SqareGame  extends JFrame //Throws IOException
 		label2 = new JLabel("  x2");
 		label3 = new JLabel("  y1");
 		label4 = new JLabel("  y2");
-		label5 = new JLabel(" add Big Square ");
+		label5 = new JLabel(" add Big Rectangle ");
 		
 		label6 = new JLabel("x1  ");
 		label7 = new JLabel("  x2");
 		label8 = new JLabel("  y1");
 		label9 = new JLabel("  y2");
-		label10 = new JLabel("  add Small Square  ");
+		label10 = new JLabel("  add Small Rectangle");
 		
     	panel1.setLayout(grid);
     	g.weightx=0;
