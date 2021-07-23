@@ -1,9 +1,11 @@
 package SquareGame;
 import Algoquest.Bound;
 
-
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -116,6 +118,7 @@ public class Painter extends JPanel
 		public void paintComponent(Graphics g)
 		{
 		   super.paintComponent(g); 
+		   Graphics2D g2d = (Graphics2D) g;
 	
 		      int i;
 		      int L;
@@ -142,10 +145,17 @@ public class Painter extends JPanel
 		    		 if (i==(arrBound.size()-1)&&(i>0) )      //  print the Answer - theMax Bound..
 		    		 {
 		      			 g.setColor(color3); 
-		    			 g.fillRect(L,B,R-L,T-B);      
-		    			 g.setColor(color1); 
-		    		     int A=(R-L)/50 ;
-		    			 g.fillRect(L+A,B+A,R-L-(10+A),T-B-(10+A));   
+		      		     Stroke stroke1 = new BasicStroke(6f);
+		      		     
+		      		     float[] dashingPattern2 = {30f, 10f};
+		      		     Stroke stroke3 = new BasicStroke(5f, BasicStroke.CAP_BUTT,
+		      		         BasicStroke.JOIN_MITER, 1.0f, dashingPattern2, 10.0f);
+		                 g2d.setStroke(stroke3);
+		    			 g2d.drawRect(L,B,R-L,T-B);      
+//		    			 g.setColor(color1); 
+//		    		     int A=(R-L)/50 ;
+//		    		     g.fillRect(L+A,B+A,R-L-(10+A),T-B-(10+A)); 
+//		    			 g.fillRect(L+A,B+A,R-L-(10+A),T-B-(10+A));   
 
 		    
 		    		 }else  if (i<(arrBound.size()-1)&&(i>0) )  {
