@@ -106,8 +106,7 @@ public class Painter extends JPanel
 		arrColorsCreated.clear();
 		
 	}
-	public void finish()
-	{
+	public void finish(){
 		
 		finish=true;
 	}
@@ -152,16 +151,14 @@ public class Painter extends JPanel
 		      		         BasicStroke.JOIN_MITER, 1.0f, dashingPattern2, 10.0f);
 		                 g2d.setStroke(stroke3);
 		    			 g2d.drawRect(L,B,R-L,T-B);      
-//		    			 g.setColor(color1); 
-//		    		     int A=(R-L)/50 ;
-//		    		     g.fillRect(L+A,B+A,R-L-(10+A),T-B-(10+A)); 
-//		    			 g.fillRect(L+A,B+A,R-L-(10+A),T-B-(10+A));   
-
 		    
 		    		 }else  if (i<(arrBound.size()-1)&&(i>0) )  {
 		    	      // x = rand.nextInt(12);
-		    			 x =  arrColorsCreated.get(i-1);
-		    			 color2 = arrColors[x];              //new Color(90,colorCounter,50);		    			
+		    			 int x =  arrColorsCreated.get(i-1);
+		    			 System.out.println(" ");
+		    			// System.out.println(" i  :  " + i);
+		    			 //System.out.println(" arrBound.size()  :  "  + arrBound.size());
+		    			 color2 = arrColors[x];             		    			
 		    			 g.setColor(color2); 
 		    			 g.fillRect(L,B,R-L,T-B);
 		    			 g.setColor(Color.black);

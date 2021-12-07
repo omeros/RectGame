@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 
 public class SqareGame  extends JFrame //Throws IOException
@@ -38,13 +42,18 @@ public class SqareGame  extends JFrame //Throws IOException
 	private JLabel label2;
 	private JLabel label3;
 	private JLabel label4;
-	private JLabel label5;
+	private JLabel bigRectangleLabel;
 	
 	private JLabel label6;
 	private JLabel label7;
 	private JLabel label8;
 	private JLabel label9;
-	private JLabel label10;
+	private JLabel smallRectangleLabel;
+	private JLabel totalTimelabel;
+	private JLabel totalTimeAns;
+	private JLabel totalSizelabel;
+	private JLabel totalSizeAns;
+	
 
 	private  JTextField textField1;	
 	private  JTextField textField2;	
@@ -68,18 +77,20 @@ public class SqareGame  extends JFrame //Throws IOException
 
 
 	
-	public SqareGame()
-	{
+	public SqareGame(){
 		layout = new BorderLayout();
 		grid = new GridBagLayout();
 		g = new GridBagConstraints();
 		
+		//getContentPane().setBackground(Color.blue);
 		setLayout(layout); 
 		panel1 = new JPanel();
 		panel4 = new JPanel();
 
 		panel2 = new Painter(100,500,200,400);
 		panel1.setBackground(Color.gray);
+		panel2.setBackground(new Color (230,235,243));
+		//panel2.setBackground(new Color (240,242,245));
 		Icon img2 = new ImageIcon("C:/util/plus2.png");
 		Icon img3 = new ImageIcon("C:/util/ok5.png");	
 		Icon img4 = new ImageIcon("C:/util/exit6.png");
@@ -96,25 +107,37 @@ public class SqareGame  extends JFrame //Throws IOException
 
 		
 		textField1 = new JTextField(5);
+		textField1.setText("0");
 		textField2 = new JTextField(5);
+		textField2.setText("0");
 		textField3 = new JTextField(5);
+		textField3.setText("0");
 		textField4 = new JTextField(5);
+		textField4.setText("0");
 		textField5 = new JTextField(5);
+		textField5.setText("0");
 		textField6 = new JTextField(5);
+		textField6.setText("0");
 		textField7 = new JTextField(5);
+		textField7.setText("0");
 		textField8 = new JTextField(5);
+		textField8.setText("0");
 				
 		label1 = new JLabel("x1  ");
 		label2 = new JLabel("  x2");
 		label3 = new JLabel("  y1");
 		label4 = new JLabel("  y2");
-		label5 = new JLabel(" add Big Rectangle ");
+		bigRectangleLabel = new JLabel(" add Big Rectangle ");
 		
 		label6 = new JLabel("x1  ");
 		label7 = new JLabel("  x2");
 		label8 = new JLabel("  y1");
 		label9 = new JLabel("  y2");
-		label10 = new JLabel("  add Small Rectangle");
+		smallRectangleLabel = new JLabel("  add Small Rectangle");
+		totalTimelabel = new JLabel("Total time :");
+		totalTimeAns = new JLabel("");
+		totalSizelabel = new JLabel("rectangle size : ");
+		totalSizeAns = new JLabel("");
 		
     	panel1.setLayout(grid);
     	g.weightx=0;
@@ -144,7 +167,7 @@ public class SqareGame  extends JFrame //Throws IOException
 		g.gridx=7;
 		panel1.add(textField4,g);
 		g.gridx=8;
-		panel1.add(label5,g);
+		panel1.add(bigRectangleLabel,g);
 		g.gridx=9;
 		panel1.add(add,g);
 		
@@ -179,7 +202,7 @@ public class SqareGame  extends JFrame //Throws IOException
 				
 		g.gridx=8;
 		g.gridy=1;
-		panel1.add(label10,g);
+		panel1.add(smallRectangleLabel,g);
 		g.gridx=9;
 		g.gridy=1;
 		panel1.add(add2,g);
@@ -200,6 +223,25 @@ public class SqareGame  extends JFrame //Throws IOException
 		g.gridy=0;
 		panel1.add(exit,g);
 		
+		
+		
+		g.gridx = 15;
+		g.gridy = 0;
+		panel1.add(totalTimelabel,g);  
+		
+		g.gridx = 16;
+		g.gridy = 0;
+		panel1.add(totalTimeAns,g);    
+		
+		g.gridx = 15;
+		g.gridy = 1;
+		panel1.add(totalSizelabel,g);
+		
+		g.gridx = 16;
+		g.gridy = 1;
+		panel1.add(totalSizeAns,g);
+		
+		
 		ButtonsHandler handler1 = new ButtonsHandler();
 		add.addActionListener(handler1);
 		add2.addActionListener(handler1);
@@ -212,16 +254,20 @@ public class SqareGame  extends JFrame //Throws IOException
 		add(panel1,BorderLayout.NORTH);
 		add(panel2,BorderLayout.CENTER);
 		
+		UIManager.put("TextField.background", Color.WHITE);
+	    UIManager.put("TextField.border", BorderFactory.createCompoundBorder(    new CustomeBorder(), 
+	            new EmptyBorder(new Insets(4,4,4,4))));
+		
 	}
 	 /************************ Handler the Buttons ************************************************************/
 		private class ButtonsHandler implements ActionListener
 	 /*********************************************************************************************************/
 		{
 			
-			int x1;
-			int x2;
-			int y1;
-			int y2;
+			int x1 = 0;
+			int x2 = 0;
+			int y1 = 0;
+			int y2 = 0;
 			public void actionPerformed(ActionEvent event)
 			{
 				
@@ -250,17 +296,18 @@ public class SqareGame  extends JFrame //Throws IOException
 						}
 		  		if(event.getSource()==clear)                // clear (new) Button
 				{
+		  			totalTimeAns.setText("");
+				    totalSizeAns.setText("");
 		  			panel2.clear();	
 		  			panel2.started();
 		  			panel2.repaint();
 			   		setSize(1280, 701); 
 		    		setSize(1280, 700);
 				}
-		  		if(event.getSource()==max)                // The Answer  
-				{
+		  		if(event.getSource()==max) {               // The Answer  
 			       panel2.finish();
 			      
-		  	       Algoquest a= new Algoquest();    
+		  	       Algoquest a = new Algoquest();    
 		  	       BoundList list2;
 		  	       Bound out;
 		  	       Object[] bon = panel2.getArr();
@@ -276,17 +323,15 @@ public class SqareGame  extends JFrame //Throws IOException
 		  	     System.out.print("  T  " + y2);
 			       double y1=b[0].getBottom();
 			  	     System.out.print("  B " + y1);
-		  	   System.out.println(" ");
-		  	   		  	   
+		  	     System.out.println(" "); 		  	   
 		  	       Bound[] f = cutTheMotherFucker(b);
-		  	       System.out.println("The small Bounds coordinates  :  ");
-
-		  	       for( int i=0; i<f.length;i++)
-		  	       {
-				  	      String s=  f[i].toString();
-			     	      System.out.println("  " + s);
-
-		  	       }
+//		  	       System.out.println("The small Bounds coordinates  :  ");
+//
+//		  	       for( int i=0; i<f.length;i++) {
+//				        String s=  f[i].toString();
+//			     	    System.out.println("  " + s);
+//
+//		  	       }
 		  	       
 		  	      SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");  
 			  	  Date date1 = new Date(); 
@@ -296,8 +341,17 @@ public class SqareGame  extends JFrame //Throws IOException
 		  	       list2=a.findMax(x1,x2,y2,y1,f);       /** The Algoquest Algorithm ===============*/
 		           out=a.findTheMaxBound(list2);
 		           
-		             System.out.println("    ");
-		    	     System.out.println("The Algorhitm's answer  :  ");
+		            System.out.println("    ");
+		            System.out.println("The small Bounds's coordinates  :  ");
+
+			  	    for( int i=0; i<f.length;i++) {
+					        String s=  f[i].toString();	     
+					        	System.out.println( s);   	      
+			  	    }
+			  	   System.out.println("  ");
+			  	   System.out.println("  ");
+		    	  
+			  	   System.out.println("The Algorhitm's answer  :  ");
 			  	     
 			  	   double s1=out.getLeft();
 			  	   System.out.print("L  " + s1);
@@ -316,6 +370,11 @@ public class SqareGame  extends JFrame //Throws IOException
 			  	   long date3 = date2.getTime() - date1.getTime();
 			  	   System.out.println("and it took " + (date3/1000) + "  seconds ");  
 //			  	  System.out.println("and it took " + formatter.format(date3) + "seconds "); 
+			  	   
+			  	 double date4 = (double)date3/1000 ;
+			  	 totalTimeAns.setText("" + date4 + " seconds");
+			  	 totalSizeAns.setText(""+ (int)ans + " pixels");
+			  	
 			  	
 		           panel2.add(out);		  			
 		  			panel2.repaint();
@@ -324,16 +383,29 @@ public class SqareGame  extends JFrame //Throws IOException
 				}
 		  		if(event.getSource()==random)                // add small bounds in random size and location 
 				{
-		  			Random rand = new Random();
-		  			int R = rand.nextInt(1280);
-		  			int L = rand.nextInt(R);		  					  			
-		  			int T = rand.nextInt(700);
-		  			int B = rand.nextInt(T);
-		  		
-		  			panel2.addBound(L,R,B,T);
-		  			panel2.repaint();
-			   		setSize(1280, 701); 
-		    		setSize(1280, 700);
+		  			try {
+			  			Random rand = new Random();
+			  			int R = rand.nextInt(1280);
+			  			if(R>=0) {
+			  				int L = rand.nextInt(R);		  					  			
+			  				int T = rand.nextInt(700);
+			  				if(T>=0 ) {
+			  					int B = rand.nextInt(T);
+			  					panel2.addBound(L,R,B,T);
+			  					panel2.repaint();
+			  					setSize(1280, 701); 
+			  					setSize(1280, 700);	
+			  				}else {
+				  				System.out.print("problem with printing the answer, T is < 0 , R is : "+ T );			  					
+			  				}
+			  			}else {
+			  				System.out.print("problem with printing the answer, R is < 0 , R is : "+ R );
+			  			}
+			  		
+		  			}
+		  			catch(Exception e){
+		  				System.out.println(" ERROR   " + e );
+		  			}
 				}
 		  		
 		  		if(event.getSource()==exit)                // add small bounds  
