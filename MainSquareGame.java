@@ -12,7 +12,7 @@ public class MainSquareGame {
 		SqareGame foc = new SqareGame();
 		foc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		foc.setBackground(Color.black);
-		foc.setSize(1280, 700);
+		foc.setSize(1920, 1080);
 		foc.setVisible(true);
 	}
 

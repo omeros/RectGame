@@ -1,12 +1,14 @@
 package SquareGame;
 
 import Algoquest.Algoquest;
+
 import Algoquest.Bound;
 import Algoquest.BoundList;
 import Algoquest.BoundNode;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -29,6 +31,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+//import com.sun.media.sound.Toolkit;
 
 
 public class SqareGame  extends JFrame //Throws IOException
@@ -134,9 +138,9 @@ public class SqareGame  extends JFrame //Throws IOException
 		label8 = new JLabel("  y1");
 		label9 = new JLabel("  y2");
 		smallRectangleLabel = new JLabel("  add Small Rectangle");
-		totalTimelabel = new JLabel("Total time :");
+		totalTimelabel = new JLabel("  Time :  ");
 		totalTimeAns = new JLabel("");
-		totalSizelabel = new JLabel("rectangle size : ");
+		totalSizelabel = new JLabel(" Size : ");
 		totalSizeAns = new JLabel("");
 		
     	panel1.setLayout(grid);
@@ -279,8 +283,15 @@ public class SqareGame  extends JFrame //Throws IOException
 		   			y2=Integer.parseInt(textField4.getText());		
 		   			panel2.updateParameters(x1,x2,y1,y2);		   	
 			   		panel2.repaint();
-			   		setSize(1280, 701); 
-		    		setSize(1280, 700);
+			   		
+			   	    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();       //<============
+			        // width will store the width of the screen
+			        int width = (int)size.getWidth();
+			        // height will store the height of the screen
+			        int height = (int)size.getHeight();
+			        
+			   		setSize(width -1, height); 
+  					setSize(width, height);
 				}
 		  		if(event.getSource()==add2)                //                add small bounds  
 						{
@@ -291,8 +302,15 @@ public class SqareGame  extends JFrame //Throws IOException
 				   			//Bound b = new Bound (x1,x2,y2,y1);
 				   			panel2.addBound(x1,x2,y1,y2);		   	
 					   		panel2.repaint();
-					   		setSize(1280, 701); 
-				    		setSize(1280, 700);
+					   		
+					   	   Dimension size = Toolkit.getDefaultToolkit().getScreenSize();       //<============
+					        // width will store the width of the screen
+					        int width = (int)size.getWidth();
+					        // height will store the height of the screen
+					        int height = (int)size.getHeight();
+					        
+					   		setSize(width -1, height); 
+		  					setSize(width, height);
 						}
 		  		if(event.getSource()==clear)                // clear (new) Button
 				{
@@ -301,13 +319,20 @@ public class SqareGame  extends JFrame //Throws IOException
 		  			panel2.clear();	
 		  			panel2.started();
 		  			panel2.repaint();
-			   		setSize(1280, 701); 
-		    		setSize(1280, 700);
+		  			
+		  		   Dimension size = Toolkit.getDefaultToolkit().getScreenSize();       //<============
+			        // width will store the width of the screen
+			        int width = (int)size.getWidth();
+			        // height will store the height of the screen
+			        int height = (int)size.getHeight();
+			        
+			   		setSize(width -1, height); 
+ 					setSize(width, height);
 				}
 		  		if(event.getSource()==max) {               // The Answer  
 			       panel2.finish();
 			      
-		  	       Algoquest a = new Algoquest();    
+		  	       Algoquest bestAlgorithemEver = new Algoquest();    
 		  	       BoundList list2;
 		  	       Bound out;
 		  	       Object[] bon = panel2.getArr();
@@ -324,22 +349,12 @@ public class SqareGame  extends JFrame //Throws IOException
 			       double y1=b[0].getBottom();
 			  	     System.out.print("  B " + y1);
 		  	     System.out.println(" "); 		  	   
-		  	       Bound[] f = cutTheMotherFucker(b);
-//		  	       System.out.println("The small Bounds coordinates  :  ");
-//
-//		  	       for( int i=0; i<f.length;i++) {
-//				        String s=  f[i].toString();
-//			     	    System.out.println("  " + s);
-//
-//		  	       }
-		  	       
+		         Bound[] f = cutTheMotherFucker(b);  	       
 		  	      SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");  
-			  	  Date date1 = new Date(); 
+			  	  Date date1 = new Date(); 		  	       		  	       
 		  	       
-		  	       
-		  	       
-		  	       list2=a.findMax(x1,x2,y2,y1,f);       /** The Algoquest Algorithm ===============*/
-		           out=a.findTheMaxBound(list2);
+		  	       list2 = bestAlgorithemEver.findMax(x1,x2,y2,y1,f);       /** The Algoquest Algorithm ===============*/
+		           out = bestAlgorithemEver.findTheMaxBound(list2);
 		           
 		            System.out.println("    ");
 		            System.out.println("The small Bounds's coordinates  :  ");
@@ -369,23 +384,29 @@ public class SqareGame  extends JFrame //Throws IOException
 			  	   Date date2 = new Date();  
 			  	   long date3 = date2.getTime() - date1.getTime();
 			  	   System.out.println("and it took " + (date3/1000) + "  seconds ");  
-//			  	  System.out.println("and it took " + formatter.format(date3) + "seconds "); 
+//			  	   System.out.println("and it took " + formatter.format(date3) + "seconds "); 
 			  	   
-			  	 double date4 = (double)date3/1000 ;
-			  	 totalTimeAns.setText("" + date4 + " seconds");
-			  	 totalSizeAns.setText(""+ (int)ans + " pixels");
+			       double date4 = (double)date3/1000 ;
+			       totalTimeAns.setText("" + date4 + " seconds");
+			       totalSizeAns.setText(""+ (int)ans + " pixels");
 			  	
 			  	
 		           panel2.add(out);		  			
-		  			panel2.repaint();
-			   		setSize(1280, 701); 
-		    		setSize(1280, 700);
+		  	       panel2.repaint();
+			       Dimension size = Toolkit.getDefaultToolkit().getScreenSize();       //<============
+			       // width will store the width of the screen
+			       int width = (int)size.getWidth();
+			       // height will store the height of the screen
+			       int height = (int)size.getHeight();
+				        
+			       setSize(width -1, height); 
+	  		       setSize(width, height);
 				}
 		  		if(event.getSource()==random)                // add small bounds in random size and location 
 				{
 		  			try {
 			  			Random rand = new Random();
-			  			int R = rand.nextInt(1280);
+			  			int R = rand.nextInt(1500);
 			  			if(R>=0) {
 			  				int L = rand.nextInt(R);		  					  			
 			  				int T = rand.nextInt(700);
@@ -393,8 +414,15 @@ public class SqareGame  extends JFrame //Throws IOException
 			  					int B = rand.nextInt(T);
 			  					panel2.addBound(L,R,B,T);
 			  					panel2.repaint();
-			  					setSize(1280, 701); 
-			  					setSize(1280, 700);	
+			  					
+			  			        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();       //<============
+						        // width will store the width of the screen
+						        int width = (int)size.getWidth();
+						        // height will store the height of the screen
+						        int height = (int)size.getHeight();
+						        
+						   		setSize(width -1, height); 
+			  					setSize(width, height);
 			  				}else {
 				  				System.out.print("problem with printing the answer, T is < 0 , R is : "+ T );			  					
 			  				}

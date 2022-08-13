@@ -76,16 +76,14 @@ public class Painter extends JPanel
 		}
 	}
 	
-	public Object[] getArr()
-	{
+	public Object[] getArr(){
 		if (arrBound!=null)
 		{
 		     Object[] b=arrBound.toArray();
 		//     Bound[] bond = (Bound[])b;
 		     return b;
 		}
-		return null;
-		
+		return null;	
 	}
 	 //        y2 = Top   ,   y1 =  Bottom
 	public void addBound(int x1,int x2, int y1, int y2)
