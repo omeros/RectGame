@@ -2,6 +2,9 @@ package SquareGame;
 
 import Algoquest.Algoquest;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import Algoquest.Bound;
 import Algoquest.BoundList;
 import Algoquest.BoundNode;
@@ -37,6 +40,7 @@ import java.awt.*;
 
 public class SqareGame  extends JFrame //Throws IOException
 {
+	private static final DecimalFormat df = new DecimalFormat("0.0"); ;
 	private JPanel panel1;
 	private Painter panel2;
 	private Painter panel3;
@@ -383,11 +387,14 @@ public class SqareGame  extends JFrame //Throws IOException
 			  	   System.out.println(" ");
 			  	   Date date2 = new Date();  
 			  	   long date3 = date2.getTime() - date1.getTime();
+			  	   
+			       df.setRoundingMode(RoundingMode.DOWN);
+			       
 			  	   System.out.println("and it took " + (date3/1000) + "  seconds ");  
 //			  	   System.out.println("and it took " + formatter.format(date3) + "seconds "); 
 			  	   
 			       double date4 = (double)date3/1000 ;
-			       totalTimeAns.setText("" + date4 + " seconds");
+			       totalTimeAns.setText("" + df.format(date4) + " seconds");
 			       totalSizeAns.setText(""+ (int)ans + " pixels");
 			  	
 			  	
